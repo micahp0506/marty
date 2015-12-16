@@ -1,19 +1,21 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
- 
+    
+    // Loading in needed assets
     game.load.image('platform', './assets/platform.png');
     game.load.image('background', './assets/BG.png');
     game.load.spritesheet('marty', './assets/marty1.png', 40, 47);
     game.load.spritesheet('candy', './assets/candy.png', 82, 98);
     game.load.tilemap('level1', './assets/newmap1.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.spritesheet('button-start', './assets/button-start.png', 401, 143); 
+    game.load.spritesheet('start', './assets/button-start.png', 401, 143); 
     game.load.image('button-pause', './assets/button-pause.png');
     game.load.image('game-over', './assets/gameover2.png'); 
     game.load.image('pfm', './assets/PFM.png');
 
 }
 
+// Declaring variables for later use
 var map;
 var layer1;
 var ground;
@@ -48,20 +50,20 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     // Setting font style
     game.fontStyle = { font: "40px Arial", fill: "#FFCC00", stroke: "#333", strokeThickness: 5, align: "center" };
-    // initialize the spawn timer
+    // Initialize the spawn timer
     game.spawnCandyTimer = 0;
-    // initialize the PFM timer
+    // Initialize the PFM timer
     game.spawnPFMTimer = 0;
-    // initialize the score text with 0
+    // Initialize the score text with 0
     scoreText = game.add.text(120, 20, "0", game.fontStyle);
+    // Adding 'Score' text
     game.add.text(0, 20, "Score:  ", game.fontStyle);
-    // initialize the health text with 10
+    // Initialize the health text with 10
     healthText = game.add.text(750, 20, "10", game.fontStyle);
+    // Adding 'Health' text
     game.add.text(615, 20, "Health:", game.fontStyle);
-    // create new group for candy
+    // Create new group for candy
     game.candyGroup = game.add.group();
-    // spawn first candy
-    // spawnCandy();
 
     // Creating map
 
@@ -99,7 +101,6 @@ function create() {
     // Creating 1000 candy
     candyGroup.createMultiple(1000, 'candy');
     candyGroup.setAll('checkWorldBounds', true);
-    // candyGroup.setAll('outOfBoundsKill', true);
 
     // Creating pfm
     pfm = game.add.sprite('pfm')
@@ -112,22 +113,20 @@ function create() {
     // Creating 1000 candy
     candyGroup.createMultiple(1000, 'pfm');
 
-    // add pause button
+    // Add pause button
     game.add.button(650, 500, 'button-pause', managePause, this);
-
-
 
 }
 
 function managePause() {
-     // pause the game
+     // Pause the game
     game.paused = true;
-    // add proper informational text
+    // Add proper informational text
     var pausedText = this.add.text(170, 250, "Game paused.\nTap anywhere to continue.", game.fontStyle);         // set event listener for the user's click/tap the screen
     game.input.onDown.add(function(){
-        // remove the pause text
+        // Remove the pause text
         pausedText.destroy();
-        // unpause the game
+        // Unpause the game
         game.paused = false;
     }, this);
 }
@@ -254,11 +253,11 @@ function update() {
 
     game.spawnPFMTimer += game.time.elapsed;
     console.log("PFM", game.spawnPFMTimer);
-    // if spawn timer reach 30 seconds (30000 miliseconds)
+    // If spawn timer reach 30 seconds (30000 miliseconds)
     if (game.spawnPFMTimer > 10000) {
-        // reset timer
+        // Reset timer
         game.spawnPFMTimer = 0;
-        // spawn new pfm
+        // Spawn new pfm
         pfmFall();
     }
 
@@ -268,19 +267,21 @@ function update() {
 
 function candyFall () {
     console.log("candyFall in");
-    // calculate drop position (from 0 to game width) on the x axis
+    // Calculate drop position (from 0 to game width) on the x axis
     var dropPos = Math.floor(Math.random()*600);
-    // define the offset for every candy
+    // Define the offset for every candy
     var dropOffset = [-27,-36,-36,-38,-48];
-    // randomize candy type
+    // Randomize candy type
     var candyType = Math.floor(Math.random()*5);
-    // game.add.sprite(dropPos, dropOffset[candyType], 'candy');
+    // Creating candy and dropping at random spot
     candy = candyGroup.create(dropPos, dropOffset[candyType], 'candy');
-    // add new animation frame
+    // Add new animation frame
     candy.animations.add('anim', [candyType], 10, true);
-    // play the newly created animation
+    // Play the newly created animation
     candy.animations.play('anim');
+    // Gravity for candy
     candy.body.gravity.y = 300;
+    // Next 4 lines checking for boundaries
     candy.body.collideWorldBounds = false;
     candy.anchor.setTo = (0.5, 0.5);
     candy.checkWorldBounds = true;
@@ -289,46 +290,33 @@ function candyFall () {
 
 function pfmFall () {
     console.log("pfm in");
-    // calculate drop position (from 0 to game width) on the x axis
+    // Calculate drop position (from 0 to game width) on the x axis
     var dropPos = Math.floor(Math.random()*600);
-
+    // Creating candy and dropping at random spot
     pfm = pfmGroup.create(dropPos, null, 'pfm')
-
+    // Giving pfm some gravity
     pfm.body.gravity.y = 300;
 }
 
 function clickCandy(thing, candy){
     // Killing candy
     candy.kill();
-    // Changing hit to true
-    hit = true;
-    console.log("clickCandy", hit);
-    // add points to the score
+    // Add points to the score
     score += 1;
-    // update score text
+    // Update score text
     scoreText.setText(score);
 }
-
-if (hit = false){
-    console.log(hit);
-    health -= 1;
-}
-
-
 
 function removeCandy(thing, candy){
     // Killing candy
     candy.kill();
-    // decrease player's health
+    // Decrease player's health
     health -= 1;
-    // update health text
+    // Update health text
     healthText.setText(health);
 }
 
-// function render() {
-//     game.debug.body(player);
-//     game.debug.body(candy);
-// }
+
 
 
 
