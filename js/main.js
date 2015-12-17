@@ -1,4 +1,7 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+app.controller("main", ["$scope", "$location", "$firebaseArray",
+  function($scope, $location, $firebaseArray) {
+
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 
 function preload() {
     
@@ -132,10 +135,13 @@ function managePause() {
 }
 
 function youDead() {
+
     // Stopping game
     game.paused = true;
     // Adding game over to screen
     game.add.sprite(0, 150, 'game-over');
+    // Showing options after game has ended
+    $("a").removeClass("hidden");
 }   
 
 function addHealth() {
@@ -317,6 +323,6 @@ function removeCandy(thing, candy){
 }
 
 
-
+}]);
 
 

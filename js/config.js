@@ -8,12 +8,14 @@ var app = angular.module("Marty", ['ngRoute', 'firebase']);
           templateUrl: './partials/login.html',
           controller: 'auth'
         })
-        // .when('/dashboard', {
-        //   templateUrl: './partials/dashboard.html',
-        //   controller: 'DashboardController',
-        //   controllerAs: 'dashboardCtrl',
-        // })
+        .when('/start', {
+          templateUrl: './partials/start.html',
+          controller: ''
+        }).when('/game', {
+          templateUrl: './partials/game.html',
+          controller: 'main'
+        })  
         .otherwise({
-          redirectTo: '/login'
+          redirectTo: '/'
         });
 }]);
