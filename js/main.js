@@ -1,5 +1,5 @@
-app.controller("main", ["$scope", "$location", "$firebaseArray",
-  function($scope, $location, $firebaseArray) {
+app.controller("main", ["$scope", "$location", "$firebaseArray", "storage",
+  function($scope, $location, $firebaseArray, storage) {
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 
@@ -142,6 +142,47 @@ function youDead() {
     game.add.sprite(0, 150, 'game-over');
     // Showing options after game has ended
     $("a").removeClass("hidden");
+    // Setting userScore to current score
+    storage.setUserScore(score);
+    // Variable to use to filter to uers score stored at firebase
+    var thisUsersCurrentScores;
+    // Variable to navigate firbases' unique key
+    var eachScoresKey;
+    //  Variable to hold users score stored at firebase
+    var usersCurrentStoredScore;
+    // Getting users current score
+    var userScore = storage.getUserScore();
+    // Getting uid;
+    var uid = storage.getUserId();
+    // Getting users email
+    var userEmail = storage.getUserEmail();
+    // Firebase highscores ref
+    var scoresRef = new Firebase("https://marty.firebaseio.com/scores/");
+    // Variable to filter scores
+    var filteredScores = scoresRef.orderByChild("uid").equalTo(uid);
+    console.log("uid", uid);
+    // Getting users score stored at firebase
+    filteredScores.once('value', function(snap) {
+        console.log("yep");
+        thisUsersCurrentScores = snap.val();
+        console.log("thisUsersCurrentScores", thisUsersCurrentScores);
+        // Looping to find current users score
+        for (eachScoresKey in thisUsersCurrentScores) {
+            usersCurrentStoredScore = thisUsersCurrentScores[eachScoresKey].score;
+            console.log("userScore", userScore);
+            console.log("usersCurrentStoredScore", usersCurrentStoredScore);
+            // Comparing current game score to store scored,
+            if (userScore > usersCurrentStoredScore) {
+                console.log("in");
+                //  Updating firebase 
+                scoresRef.child(eachScoresKey).update ({
+
+                    score: userScore
+
+                })
+            }   
+        }
+    });
 }   
 
 function addHealth() {
@@ -245,10 +286,13 @@ function update() {
         fallRate = 450;
         // console.log(spawnCandyTimer);
     }
+    if (score === 40) {
+        fallrate = 400;
+    }
 
     // Calls the candFall() at the correct time, fallRate set at 1000 by default
     game.spawnCandyTimer += game.time.elapsed;
-    console.log("candy", game.spawnCandyTimer);
+    // console.log("candy", game.spawnCandyTimer);
     // if spawn timer reach one second (1000 miliseconds)
     if(game.spawnCandyTimer > fallRate) {
         // reset timer
@@ -258,7 +302,7 @@ function update() {
     }
 
     game.spawnPFMTimer += game.time.elapsed;
-    console.log("PFM", game.spawnPFMTimer);
+    // console.log("PFM", game.spawnPFMTimer);
     // If spawn timer reach 30 seconds (30000 miliseconds)
     if (game.spawnPFMTimer > 10000) {
         // Reset timer

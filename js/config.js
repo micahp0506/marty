@@ -11,10 +11,15 @@ var app = angular.module("Marty", ['ngRoute', 'firebase']);
         .when('/start', {
           templateUrl: './partials/start.html',
           controller: ''
-        }).when('/game', {
+        })
+        .when('/game', {
           templateUrl: './partials/game.html',
           controller: 'main'
-        })  
+        })
+        .when('/leaderboard', {
+          templateUrl: './partials/leaderboard.html',
+          controller: 'leaderboard'
+        })    
         .otherwise({
           redirectTo: '/'
         });
