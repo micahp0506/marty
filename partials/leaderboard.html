@@ -1,11 +1,11 @@
 
 <div ng-controller="leaderboard">
   <table class="leaderboard">
-    <tr>
+    <tr id="ten">
       <th>Top 10</th>
     </tr>
     <tr ng-repeat="info in allScores | orderBy:'-score' | limitTo: 10">
-      <td>{{info.email}}</td>
+      <td>{{info.name}}</td>
       <td>{{info.score}}</td>
     </tr>
   </table>

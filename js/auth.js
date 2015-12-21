@@ -16,9 +16,11 @@ app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
 
         $scope.authObj.$createUser($scope.userObj)
         .then(function(userData) {
-          // Setting userEamil to email entered
+        // Setting userEamil to email entered
         var userEmail = $scope.userObj.email;
         console.log("User " + userData.uid + " created successfully!");
+        // Setting user nickname
+        var userNickname = $scope.userObj.nickname;
         // Getting firebase with "users" object
         var uidRef = new Firebase("https://marty.firebaseio.com/users/" + userData.uid);
         // Getting firebase with "scores" object
@@ -35,7 +37,8 @@ app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
 
          score: 0,
          email: userEmail,
-         uid: userData.uid
+         uid: userData.uid,
+         name: userNickname
 
         })
         // Logging-in user
