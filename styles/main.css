@@ -1,42 +1,8 @@
 body {
-	
 	background: #B4D9E7;
-	
 }
 
-canvas {
-	
-   display : block;
-   margin : auto;
-}
-
-
-.hidden {
-
-	display: none;
-
-}
-
-.play {
-	
-	font: Arial;
-	color: #FFCC00;
-	text-decoration: none;
-	font-size: 40px;
-	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
-}
-
-
-.leader {
-	
-	font: Arial;
-	color: #FFCC00;
-	text-decoration: none;
-	font-size: 40px;
-	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
-	
-}
-
+/*Login page*/
 #marty {
 	font: Arial;
 	color: #FFCC00;
@@ -44,26 +10,86 @@ canvas {
 	font-size: 40px;
 	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
 	text-align: center;
-	background: './assets/BG.png';
 }
 
 .email {
 	text-align: center;
+}
 
+#user-email {
+	border: solid 1px #707070;
+  	box-shadow: 0 0 5px 1px #969696;
+	height: 25px;
+	width: 250px;
+	font-size: 25px;
 }
 
 .password {
 	text-align: center;
 }
 
-.nickname {
-	text-align: center;
+#user-password {
+	border: solid 1px #707070;
+  	box-shadow: 0 0 5px 1px #969696;
+	height: 25px;
+	width: 250px;
+	font-size: 25px;
 }
 
 .buttons {
+	margin-top: 10px;
 	text-align: center;
 }
 
+.btn {
+	font-size: 15px;
+}
+
+/*Game page*/
+canvas {
+   display : block;
+   margin : auto;
+}
+
+.play {
+	font: Arial;
+	color: #FFCC00;
+	text-decoration: none;
+	font-size: 20px;
+	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
+	margin-left: -20px;
+	margin-top: 40px;
+}
+
+.leader {
+	font: Arial;
+	color: #FFCC00;
+	text-decoration: none;
+	font-size: 20px;
+	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
+	margin-left: 20px;
+	margin-top: 40px;
+}
+
+.login {
+	font: Arial;
+	color: #FFCC00;
+	text-decoration: none;
+	font-size: 20px;
+	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
+	margin-left: 20px;
+	margin-top: 40px;
+}
+
+#options {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
+}
+
+/*Leaderboard page*/
 #ten {
 	font: Arial;
 	color: #FFCC00;
@@ -74,10 +100,35 @@ canvas {
 }
 
 .leaderboard {
-	background:;
-	margin : auto;
+	margin: auto;
 }
 
+#info {
+	font-weight: bold;
+}
+
+/*Start page*/
+#image {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+}
+
+
+
+#play {
+	font: Arial;
+	color: #FFCC00;
+	text-decoration: none;
+	font-size: 20px;
+	text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #333, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
+	text-align: center;
+}
+
+#header {
+	font-size: 60px;
+}
 
 
 

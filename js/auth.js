@@ -37,8 +37,7 @@ app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
 
          score: 0,
          email: userEmail,
-         uid: userData.uid,
-         name: userNickname
+         uid: userData.uid
 
         })
         // Logging-in user
