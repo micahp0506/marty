@@ -4,16 +4,16 @@ app.controller("main", ["$scope", "$location", "$firebaseArray", "storage",
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
 
 function preload() {
-    
+
     // Loading in needed assets
     game.load.image('platform', './assets/platform.png');
     game.load.image('background', './assets/BG.png');
     game.load.spritesheet('marty', './assets/marty1.png', 40, 47);
     game.load.spritesheet('candy', './assets/candy.png', 82, 98);
     game.load.tilemap('level1', './assets/newmap1.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.spritesheet('start', './assets/button-start.png', 401, 143); 
+    game.load.spritesheet('start', './assets/button-start.png', 401, 143);
     game.load.image('button-pause', './assets/button-pause.png');
-    game.load.image('game-over', './assets/gameover2.png'); 
+    game.load.image('game-over', './assets/gameover2.png');
     game.load.image('pfm', './assets/PFM.png');
 
 }
@@ -80,7 +80,7 @@ function create() {
     ground.body.immovable = true;
     // Scales the ground
     ground.scale.setTo(2, 2);
-    
+
 
     // Creating player
     player = game.add.sprite(32, game.world.height - 150, 'marty');
@@ -160,30 +160,24 @@ function youDead() {
     var scoresRef = new Firebase("https://marty.firebaseio.com/scores/");
     // Variable to filter scores
     var filteredScores = scoresRef.orderByChild("uid").equalTo(uid);
-    console.log("uid", uid);
     // Getting users score stored at firebase
     filteredScores.once('value', function(snap) {
-        console.log("yep");
         thisUsersCurrentScores = snap.val();
-        console.log("thisUsersCurrentScores", thisUsersCurrentScores);
         // Looping to find current users score
         for (eachScoresKey in thisUsersCurrentScores) {
             usersCurrentStoredScore = thisUsersCurrentScores[eachScoresKey].score;
-            console.log("userScore", userScore);
-            console.log("usersCurrentStoredScore", usersCurrentStoredScore);
             // Comparing current game score to store scored,
             if (userScore > usersCurrentStoredScore) {
-                console.log("in");
-                //  Updating firebase 
+                //  Updating firebase
                 scoresRef.child(eachScoresKey).update ({
 
                     score: userScore
 
                 })
-            }   
+            }
         }
     });
-}   
+}
 
 function addHealth() {
     // Killing pfm
@@ -269,7 +263,7 @@ function update() {
     if (score === 15) {
         fallRate = 650;
         // console.log(spawnCandyTimer);
-    }     
+    }
     if (score === 20) {
         fallRate = 600;
         // console.log(spawnCandyTimer);
@@ -292,7 +286,6 @@ function update() {
 
     // Calls the candFall() at the correct time, fallRate set at 1000 by default
     game.spawnCandyTimer += game.time.elapsed;
-    // console.log("candy", game.spawnCandyTimer);
     // if spawn timer reach one second (1000 miliseconds)
     if(game.spawnCandyTimer > fallRate) {
         // reset timer
@@ -302,7 +295,6 @@ function update() {
     }
 
     game.spawnPFMTimer += game.time.elapsed;
-    // console.log("PFM", game.spawnPFMTimer);
     // If spawn timer reach 30 seconds (30000 miliseconds)
     if (game.spawnPFMTimer > 10000) {
         // Reset timer
@@ -316,7 +308,6 @@ function update() {
 
 
 function candyFall () {
-    console.log("candyFall in");
     // Calculate drop position (from 0 to game width) on the x axis
     var dropPos = Math.floor(Math.random()*600);
     // Define the offset for every candy
@@ -339,7 +330,6 @@ function candyFall () {
 }
 
 function pfmFall () {
-    console.log("pfm in");
     // Calculate drop position (from 0 to game width) on the x axis
     var dropPos = Math.floor(Math.random()*600);
     // Creating candy and dropping at random spot

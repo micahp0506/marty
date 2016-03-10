@@ -1,18 +1,17 @@
 app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
   function($scope, $location, $firebaseAuth, storage) {
 
-    
+
     // Getting firebase reference
     var ref = new Firebase("https://marty.firebaseio.com/");
 
     $scope.authObj = $firebaseAuth(ref);
     $scope.userObj = {};
-    
+
     // Function to create new player/user
     $scope.registerUser = function () {
         // This to logout current signed in user
         ref.unauth();
-        console.log("$scope.userObj", $scope.userObj);
 
         $scope.authObj.$createUser($scope.userObj)
         .then(function(userData) {
@@ -56,9 +55,8 @@ app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
       ref.unauth();
     	$scope.authObj.$authWithPassword($scope.userObj)
       .then(function(authData) {
-      console.log("$scope.userObj", $scope.userObj);
           console.log("Logged in as:", authData.uid);
-          // Setting userID 
+          // Setting userID
 		      storage.setUserId(authData.uid);
           // Setting userEmail
           storage.setUserEmail($scope.userObj.email);
@@ -70,4 +68,4 @@ app.controller("auth", ["$scope", "$location", "$firebaseAuth", "storage",
         });
     };
 
-}]);	
+}]);
