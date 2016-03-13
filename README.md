@@ -1,7 +1,7 @@
 
 <snippet>
 <content>
-# <a href="https://marty.firebaseapp.com/#/"marty</a>
+<a href="https://marty.firebaseapp.com/#/"marty</a>
 
 marty is a game buit with the PHASER gaming engine, along with AngularJS, AngularFire, and Firebase.
 
