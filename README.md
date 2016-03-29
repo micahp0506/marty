@@ -1,11 +1,12 @@
 
 <snippet>
 <content>
-#<a href="https://marty.firebaseapp.com/#/">marty</a>
+#Marty
+<a href="https://marty.firebaseapp.com/#/">demo</a> here
 
-marty is a game buit with the PHASER gaming engine, along with AngularJS, AngularFire, and Firebase.
+Marty is a game buit with the PHASER gaming engine, along with AngularJS, AngularFire, and Firebase.
 
-marty has the player play as Marty Mcfly on a hoverboard and is tasked with collecting as much "candy" before the players life reaches 0. As the players score increases, the "candy" will fall at a faster rate. Collect "PFM" to increase the players health by 1.
+Marty has the player play as Marty Mcfly on a hoverboard and is tasked with collecting as much "candy" before the players life reaches 0. As the players score increases, the "candy" will fall at a faster rate. Collect "PFM" to increase the players health by 1.
 
 Use the arrow keys to move Marty around the screen
 
@@ -30,7 +31,6 @@ bower install
 hs
 ```
 ## Usage
-Click on the "marty" title at the top of this file and you will be redirected toward the hosted site where you can play the game.
 Browse to the i.p. address in the terminal to play it on your local host or open with your favorite text editor and you should be ready to start coding.
 ## License
 MIT
